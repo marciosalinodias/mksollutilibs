@@ -1,0 +1,70 @@
+window.mcmFBIntegrator = {
+    poweredBy: 'MCM A TEC',
+    fb: {
+      BaseUrl: 'https://graph.facebook.com/v12.0/{PixelId}/events',
+      PixelId: '',
+      ApiToken: '',
+      TestEventCode: '',
+    },
+    mcmGetUrl: function(){
+      return window.mcmFBIntegrator.fb.BaseUrl.replace('{PixelId}', window.mcmFBIntegrator.fb.PixelId).concat('?access_token=', window.mcmFBIntegrator.fb.ApiToken);
+    },
+    mcmGetIp: async function(){
+      return (await fetch("https://api.ipify.org/?format=json").then(r => r.json())).ip;
+    },
+    mcmPost: async function(data = {}){
+      const response = await fetch(window.mcmFBIntegrator.mcmGetUrl(), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      return response.json();
+    }
+  };
+  
+  function viewContent(){
+    window.mcmFBIntegrator.mcmPost({
+      "data": [
+       {  
+          "event_name": "ViewContent",
+          "event_time": Date.now(),
+          "event_source_url": window.location.origin,
+          "user_data": {
+            "client_ip_address": window.myIp,
+            "client_user_agent": window.navigator.userAgent
+          }
+       }
+      ],
+      "test_event_code": "TEST25097"
+    });
+  }
+  
+  function createSimpleEventObject(eventName){
+    var simpleEvent = {
+      "data": [
+       {  
+          "event_name": eventName,
+          "event_time": Date.now(),
+          "event_source_url": window.location.origin,
+          "user_data": {
+            "client_ip_address": window.myIp,
+            "client_user_agent": window.navigator.userAgent
+          }
+       }
+      ]
+    };
+    
+    if(window.mcmFBIntegrator.fb.TestEventCode.length > 0){
+      simpleEvent["test_event_code"] = window.mcmFBIntegrator.fb.TestEventCode;
+    }
+    
+    return simpleEvent;
+  }
+  
+  function pageView(){
+    window.mcmFBIntegrator.mcmPost();
+  }
+  
+  window.myIp = window.mcmFBIntegrator.mcmGetIp();
