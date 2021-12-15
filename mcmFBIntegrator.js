@@ -54,7 +54,7 @@ class mcmFBIntegrator {
 
         let dataEvent = {
             "data": [
-                ...simpleEvent
+                simpleEvent
             ]
         };
 
