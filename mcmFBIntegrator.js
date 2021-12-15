@@ -11,11 +11,11 @@ class mcmFBIntegrator {
         }
     };
     
-    async constructor (PixelId, ApiToken, TestEventCode = null) {
+    constructor (PixelId, ApiToken, TestEventCode = null) {
         this.#props.fb.PixelId = PixelId;
         this.#props.fb.ApiToken = ApiToken;
         this.#props.fb.TestEventCode = TestEventCode;
-        this.#props.ip = await this.#mcmGetIp();
+        this.#props.ip = this.#mcmGetIp();
     }
 
     #mcmGetUrl = function () {
