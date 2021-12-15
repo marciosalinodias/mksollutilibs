@@ -55,8 +55,10 @@ class mcmFBIntegrator {
             ]
         };
 
-        if (this.#props.fb.TestEventCode.length > 0) {
-            simpleEvent["test_event_code"] = this.#props.fb.TestEventCode;
+        if (this.#props.fb.TestEventCode != null){
+            if(this.#props.fb.TestEventCode.length > 0) {
+                simpleEvent["test_event_code"] = this.#props.fb.TestEventCode;
+            }
         }
 
         return simpleEvent;
