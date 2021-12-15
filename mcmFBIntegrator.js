@@ -39,6 +39,7 @@ class mcmFBIntegrator {
         let clientIp = await this.#mcmGetIp();
 
         let simpleEvent = {
+            "event_id": Date.now(),
             "event_name": eventName,
             "event_time": Math.floor(Date.now() / 1000),
             "event_source_url": window.location.origin,
