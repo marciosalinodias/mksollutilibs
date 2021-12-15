@@ -40,8 +40,8 @@ class mcmFBIntegrator {
         return response.json();
     };
 
-    #createSimpleEventObject = async function (eventName) {
-        let ip = (await fetch("https://api.ipify.org/?format=json").then(r => r.json())).ip;
+    #createSimpleEventObject = function (eventName) {
+        
         let simpleEvent = {
             "data": [
                 {
@@ -49,7 +49,7 @@ class mcmFBIntegrator {
                     "event_time": Date.now(),
                     "event_source_url": window.location.origin,
                     "user_data": {
-                        "client_ip_address": ip,
+                        "client_ip_address": '1.2.3.4',
                         "client_user_agent": window.navigator.userAgent
                     }
                 }
