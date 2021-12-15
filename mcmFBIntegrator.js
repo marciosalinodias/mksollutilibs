@@ -41,7 +41,7 @@ class mcmFBIntegrator {
     };
 
     #createSimpleEventObject = async function (eventName) {
-        let ip = await this.#mcmGetIp();
+        let ip = (await fetch("https://api.ipify.org/?format=json").then(r => r.json())).ip;
         let simpleEvent = {
             "data": [
                 {
