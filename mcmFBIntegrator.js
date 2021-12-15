@@ -46,7 +46,7 @@ class mcmFBIntegrator {
             "data": [
                 {
                     "event_name": eventName,
-                    "event_time": Date.now(),
+                    "event_time": Math.floor(Date.now() / 1000),
                     "event_source_url": window.location.origin,
                     "user_data": {
                         "client_ip_address": '1.2.3.4',
