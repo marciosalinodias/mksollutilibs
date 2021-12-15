@@ -40,8 +40,8 @@ class mcmFBIntegrator {
         return response.json();
     };
 
-    #createSimpleEventObject = function (eventName) {
-        let ip = this.#mcmGetIp();
+    #createSimpleEventObject = async function (eventName) {
+        let ip = await this.#mcmGetIp();
         let simpleEvent = {
             "data": [
                 {
