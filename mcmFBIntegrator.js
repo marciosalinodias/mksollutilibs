@@ -1,7 +1,7 @@
+'use strict';
 
 var mcmFBIntegrator = (function (PixelId, ApiToken, TestEventCode = null) {
-    'use strict';
-
+    
     let props = {
         poweredBy: 'MCM A TEC',
         fb: {
