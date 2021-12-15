@@ -30,7 +30,7 @@ class mcmFBIntegrator {
             sendData = { ...sendData, data };
         }
 
-        const response = await fetch(privMethods.mcmGetUrl(), {
+        const response = await fetch(this.#mcmGetUrl(), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ class mcmFBIntegrator {
                     "event_time": Date.now(),
                     "event_source_url": window.location.origin,
                     "user_data": {
-                        "client_ip_address": privMethods.mcmGetIp(),
+                        "client_ip_address": this.#mcmGetIp(),
                         "client_user_agent": window.navigator.userAgent
                     }
                 }
