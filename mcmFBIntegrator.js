@@ -15,7 +15,6 @@ class mcmFBIntegrator {
         this.#props.fb.PixelId = PixelId;
         this.#props.fb.ApiToken = ApiToken;
         this.#props.fb.TestEventCode = TestEventCode;
-        this.#props.ip = this.#mcmGetIp();
     }
 
     #mcmGetUrl = function () {
@@ -25,12 +24,7 @@ class mcmFBIntegrator {
         return (await fetch("https://api.ipify.org/?format=json").then(r => r.json())).ip;
     };
     #mcmPost = async function (eventname, data = null) {
-
-        let sendData = await this.#createSimpleEventObject(eventname);
-        if (data != null) {
-            sendData = { ...sendData, data };
-        }
-
+        let sendData = await this.#createSimpleEventObject(eventname, data);
         const response = await fetch(this.#mcmGetUrl(), {
             method: 'POST',
             headers: {
@@ -41,45 +35,84 @@ class mcmFBIntegrator {
         return response.json();
     };
 
-    #createSimpleEventObject = async function (eventName) {
-        console.log(this.#props);
+    #createSimpleEventObject = async function (eventName, data = null) {
         let clientIp = await this.#mcmGetIp();
+
         let simpleEvent = {
+            "event_name": eventName,
+            "event_time": Math.floor(Date.now() / 1000),
+            "event_source_url": window.location.origin,
+            "user_data": {
+                "client_ip_address": clientIp,
+                "client_user_agent": window.navigator.userAgent
+            }
+        };
+
+        if(data != null){
+            simpleEvent = {...simpleEvent, data};
+        }
+
+        let dataEvent = {
             "data": [
-                {
-                    "event_name": eventName,
-                    "event_time": Math.floor(Date.now() / 1000),
-                    "event_source_url": window.location.origin,
-                    "user_data": {
-                        "client_ip_address": clientIp,
-                        "client_user_agent": window.navigator.userAgent
-                    }
-                }
+                ...simpleEvent
             ]
         };
 
         if (this.#props.fb.TestEventCode != null){
             if(this.#props.fb.TestEventCode.length > 0) {
-                simpleEvent["test_event_code"] = this.#props.fb.TestEventCode;
+                dataEvent["test_event_code"] = this.#props.fb.TestEventCode;
             }
         }
 
-        return simpleEvent;
+        return dataEvent;
     }
 
     //
     // Methods
     //
-
+    pageView = function (data = null) {
+        let returnVal = this.#mcmPost('PageView', data);
+        console.log(returnVal);
+        return returnVal;
+    };
+    
     viewContent = function (data = null) {
         let returnVal = this.#mcmPost('ViewContent', data);
         console.log(returnVal);
         return returnVal;
     };
 
-    pageView = function (data = null) {
-        let returnVal = this.#mcmPost('PageView', data);
+    search = function (data = null) {
+        let returnVal = this.#mcmPost('Search', data);
         console.log(returnVal);
         return returnVal;
-    };   
+    };
+    
+    addToCart = function (data = null) {
+        let returnVal = this.#mcmPost('AddToCart', data);
+        console.log(returnVal);
+        return returnVal;
+    };
+
+    initiateCheckout = function (data = null) {
+        let returnVal = this.#mcmPost('InitiateCheckout', data);
+        console.log(returnVal);
+        return returnVal;
+    };
+
+    purchase = function (value, data = null) {
+
+        if(data == null){
+            data = {
+                "custom_data": {
+                    "currency": "BRL",
+                    "value": value
+                }
+            }
+        }
+
+        let returnVal = this.#mcmPost('Purchase', data);
+        console.log(returnVal);
+        return returnVal;
+    };
 };
