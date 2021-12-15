@@ -49,7 +49,7 @@ class mcmFBIntegrator {
         };
 
         if(data != null){
-            simpleEvent = {...simpleEvent, data};
+            simpleEvent = {...simpleEvent, ...data};
         }
 
         let dataEvent = {
