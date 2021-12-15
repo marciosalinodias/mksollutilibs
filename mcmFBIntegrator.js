@@ -1,6 +1,6 @@
 'use strict';
 
-var mcmFBIntegrator = (function (PixelId, ApiToken, TestEventCode = null) {
+var mcmFBIntegrator = function (PixelId, ApiToken, TestEventCode = null) {
     
     let props = {
         poweredBy: 'MCM A TEC',
@@ -74,4 +74,4 @@ var mcmFBIntegrator = (function (PixelId, ApiToken, TestEventCode = null) {
     // Expose the public methods
     return methods;
 
-})();
+}();
