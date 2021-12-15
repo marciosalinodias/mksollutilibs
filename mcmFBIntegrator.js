@@ -18,7 +18,7 @@ class mcmFBIntegrator {
     }
 
     #mcmGetUrl = function () {
-        return props.fb.BaseUrl.replace('{PixelId}', props.fb.PixelId).concat('?access_token=', props.fb.ApiToken);
+        return this.#props.fb.BaseUrl.replace('{PixelId}', this.#props.fb.PixelId).concat('?access_token=', this.#props.fb.ApiToken);
     };
     #mcmGetIp = async function () {
         return (await fetch("https://api.ipify.org/?format=json").then(r => r.json())).ip;
@@ -69,10 +69,14 @@ class mcmFBIntegrator {
     //
 
     viewContent = function (data = null) {
-        this.#mcmPost('ViewContent', data);
+        let returnVal = this.#mcmPost('ViewContent', data);
+        console.log(returnVal);
+        return returnVal;
     };
 
     pageView = function (data = null) {
-        this.#mcmPost('PageView', data);
+        let returnVal = this.#mcmPost('PageView', data);
+        console.log(returnVal);
+        return returnVal;
     };   
 };
