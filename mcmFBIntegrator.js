@@ -6,15 +6,15 @@ class mcmFBIntegrator {
         fb: {
             BaseUrl: 'https://graph.facebook.com/v12.0/{PixelId}/events',
             PixelId: '',
-            ApiToken: 'ApiToken',
+            ApiToken: '',
             TestEventCode: null,
         }
     };
     
     constructor (PixelId, ApiToken, TestEventCode = null) {
-        this.#props.PixelId = PixelId;
-        this.#props.ApiToken = ApiToken;
-        this.#props.TestEventCode = TestEventCode;
+        this.#props.fb.PixelId = PixelId;
+        this.#props.fb.ApiToken = ApiToken;
+        this.#props.fb.TestEventCode = TestEventCode;
     }
 
     #mcmGetUrl = function () {
