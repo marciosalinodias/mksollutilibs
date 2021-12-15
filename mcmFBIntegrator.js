@@ -41,14 +41,15 @@ class mcmFBIntegrator {
     };
 
     #createSimpleEventObject = function (eventName) {
-        var simpleEvent = {
+        let ip = this.#mcmGetIp();
+        let simpleEvent = {
             "data": [
                 {
                     "event_name": eventName,
                     "event_time": Date.now(),
                     "event_source_url": window.location.origin,
                     "user_data": {
-                        "client_ip_address": this.#mcmGetIp(),
+                        "client_ip_address": ip,
                         "client_user_agent": window.navigator.userAgent
                     }
                 }
