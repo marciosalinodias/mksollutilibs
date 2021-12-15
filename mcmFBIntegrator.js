@@ -11,10 +11,11 @@ class mcmFBIntegrator {
         }
     };
     
-    constructor (PixelId, ApiToken, TestEventCode = null) {
+    async constructor (PixelId, ApiToken, TestEventCode = null) {
         this.#props.fb.PixelId = PixelId;
         this.#props.fb.ApiToken = ApiToken;
         this.#props.fb.TestEventCode = TestEventCode;
+        this.#props.ip = await this.#mcmGetIp();
     }
 
     #mcmGetUrl = function () {
@@ -25,7 +26,7 @@ class mcmFBIntegrator {
     };
     #mcmPost = async function (eventname, data = null) {
 
-        let sendData = this.#createSimpleEventObject(eventname);
+        let sendData = await this.#createSimpleEventObject(eventname);
         if (data != null) {
             sendData = { ...sendData, data };
         }
@@ -40,8 +41,9 @@ class mcmFBIntegrator {
         return response.json();
     };
 
-    #createSimpleEventObject = function (eventName) {
-        
+    #createSimpleEventObject = async function (eventName) {
+        console.log(this.#props);
+        let clientIp = await this.#mcmGetIp();
         let simpleEvent = {
             "data": [
                 {
@@ -49,7 +51,7 @@ class mcmFBIntegrator {
                     "event_time": Math.floor(Date.now() / 1000),
                     "event_source_url": window.location.origin,
                     "user_data": {
-                        "client_ip_address": '1.2.3.4',
+                        "client_ip_address": clientIp,
                         "client_user_agent": window.navigator.userAgent
                     }
                 }
