@@ -82,6 +82,18 @@ class mcmFBIntegrator {
         console.log(returnVal);
         return returnVal;
     };
+    
+    completeRegistration = function (data = null) {
+        let returnVal = this.#mcmPost('CompleteRegistration', data);
+        console.log(returnVal);
+        return returnVal;
+    };
+
+    addPaymentInfo = function (data = null) {
+        let returnVal = this.#mcmPost('AddPaymentInfo', data);
+        console.log(returnVal);
+        return returnVal;
+    };
 
     search = function (data = null) {
         let returnVal = this.#mcmPost('Search', data);
