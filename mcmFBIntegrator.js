@@ -8,13 +8,17 @@ class mcmFBIntegrator {
             PixelId: '',
             ApiToken: '',
             TestEventCode: null,
-        }
+            FbPixelToo: false
+        },
+        ShowConsole: false
     };
     
-    constructor (PixelId, ApiToken, TestEventCode = null) {
+    constructor (PixelId, ApiToken, TestEventCode = null, FbPixelToo = false, ShowConsole = false) {
         this.#props.fb.PixelId = PixelId;
         this.#props.fb.ApiToken = ApiToken;
         this.#props.fb.TestEventCode = TestEventCode;
+        this.#props.fb.FbPixelToo = FbPixelToo;
+        this.#props.ShowConsole = ShowConsole;
     }
 
     #mcmGetUrl = function () {
@@ -39,7 +43,7 @@ class mcmFBIntegrator {
         let clientIp = await this.#mcmGetIp();
 
         let simpleEvent = {
-            "event_id": Date.now(),
+            "event_id": 'fbapi_' + Date.now(),
             "event_name": eventName,
             "event_time": Math.floor(Date.now() / 1000),
             "event_source_url": window.location.origin,
@@ -71,45 +75,101 @@ class mcmFBIntegrator {
     //
     // Methods
     //
-    pageView = function (data = null) {
-        let returnVal = this.#mcmPost('PageView', data);
-        console.log(returnVal);
+    pageView = async function (data = null) {
+        let returnVal = await this.#mcmPost('PageView', data);
+        if(this.#props.fb.FbPixelToo && fbq){
+            if(this.#props.ShowConsole){
+                console.log('FBP PageView');
+            }
+            fbq('track', 'PageView', {}, {eventID: 'fbp_' + Date.now()});
+        }
+        if(this.#props.ShowConsole){
+            console.log('PageView', data, returnVal);
+        }
         return returnVal;
     };
     
-    viewContent = function (data = null) {
-        let returnVal = this.#mcmPost('ViewContent', data);
-        console.log(returnVal);
+    viewContent = async function (data = null) {
+        let returnVal = await this.#mcmPost('ViewContent', data);
+        if(this.#props.fb.FbPixelToo && fbq){
+            if(this.#props.ShowConsole){
+                console.log('FBP ViewContent');
+            }
+            fbq('track', 'ViewContent', {}, {eventID: 'fbp_' + Date.now()} );
+        }
+        if(this.#props.ShowConsole){
+            console.log('ViewContent', data, returnVal);
+        }
         return returnVal;
     };
     
-    completeRegistration = function (data = null) {
-        let returnVal = this.#mcmPost('CompleteRegistration', data);
-        console.log(returnVal);
+    completeRegistration = async function (data = null) {
+        let returnVal = await this.#mcmPost('CompleteRegistration', data);
+        if(this.#props.fb.FbPixelToo && fbq){
+            if(this.#props.ShowConsole){
+                console.log('FBP CompleteRegistration');
+            }
+            fbq('track', 'CompleteRegistration', {}, {eventID: 'fbp_' + Date.now()} );
+        }
+        if(this.#props.ShowConsole){
+            console.log('CompleteRegistration', data, returnVal);
+        }
         return returnVal;
     };
 
-    addPaymentInfo = function (data = null) {
-        let returnVal = this.#mcmPost('AddPaymentInfo', data);
-        console.log(returnVal);
+    addPaymentInfo = async function (data = null) {
+        let returnVal = await this.#mcmPost('AddPaymentInfo', data);
+        if(this.#props.fb.FbPixelToo && fbq){
+            if(this.#props.ShowConsole){
+                console.log('FBP AddPaymentInfo');
+            }
+            fbq('track', 'AddPaymentInfo', {}, {eventID: 'fbp_' + Date.now()} );
+        }
+        if(this.#props.ShowConsole){
+            console.log('AddPaymentInfo', data, returnVal);
+        }
         return returnVal;
     };
 
-    search = function (data = null) {
-        let returnVal = this.#mcmPost('Search', data);
-        console.log(returnVal);
+    search = async function (data = null) {
+        let returnVal = await this.#mcmPost('Search', data);
+        if(this.#props.fb.FbPixelToo && fbq){
+            if(this.#props.ShowConsole){
+                console.log('FBP Search');
+            }
+            fbq('track', 'Search', {}, {eventID: 'fbp_' + Date.now()} );
+        }
+        if(this.#props.ShowConsole){
+            console.log('Search', data, returnVal);
+        }
         return returnVal;
     };
     
-    addToCart = function (data = null) {
-        let returnVal = this.#mcmPost('AddToCart', data);
-        console.log(returnVal);
+    addToCart = async function (data = null) {
+        let returnVal = await this.#mcmPost('AddToCart', data);
+        if(this.#props.fb.FbPixelToo && fbq){
+            if(this.#props.ShowConsole){
+                console.log('FBP AddToCart');
+            }
+            fbq('track', 'AddToCart', {}, {eventID: 'fbp_' + Date.now()} );
+        }
+        if(this.#props.ShowConsole){
+            console.log('AddToCart', data, returnVal);
+        }
         return returnVal;
     };
 
     initiateCheckout = function (data = null) {
         let returnVal = this.#mcmPost('InitiateCheckout', data);
-        console.log(returnVal);
+        if(this.#props.fb.FbPixelToo && fbq){
+            if(this.#props.ShowConsole){
+                console.log('FBP InitiateCheckout');
+            }
+            fbq('track', 'InitiateCheckout', {}, {eventID: 'fbp_' + Date.now()} );
+        }
+        if(this.#props.ShowConsole){
+            console.log('InitiateCheckout', data, returnVal);
+        }
         return returnVal;
     };
 
@@ -125,7 +185,15 @@ class mcmFBIntegrator {
         }
 
         let returnVal = this.#mcmPost('Purchase', data);
-        console.log(returnVal);
+        if(this.#props.fb.FbPixelToo && fbq){
+            if(this.#props.ShowConsole){
+                console.log('FBP Purchase');
+            }
+            fbq('track', 'Purchase', {}, {eventID: 'fbp_' + Date.now()} );
+        }
+        if(this.#props.ShowConsole){
+            console.log('Purchase', data, returnVal);
+        }
         return returnVal;
     };
 };
