@@ -46,7 +46,7 @@ class mcmFBIntegrator {
             "event_id": 'fbapi_' + Date.now(),
             "event_name": eventName,
             "event_time": Math.floor(Date.now() / 1000),
-            "event_source_url": window.location.origin,
+            "event_source_url": "https://www.vimoveisdecor.com.br",
             "user_data": {
                 "client_ip_address": clientIp,
                 "client_user_agent": window.navigator.userAgent
