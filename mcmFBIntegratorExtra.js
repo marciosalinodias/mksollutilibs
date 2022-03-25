@@ -83,6 +83,12 @@ class mcmFBIntegrator {
         return returnVal;
     };
 
+    viewCategory = function (data = null) {
+        let returnVal = this.#mcmPost('ViewCategory', data);
+        console.log(returnVal);
+        return returnVal;
+    };
+
     search = function (data = null) {
         let returnVal = this.#mcmPost('Search', data);
         console.log(returnVal);
