@@ -88,7 +88,7 @@ class mkFBIntegrator {
             if(this.#props.ShowConsole){
                 console.log('FBP PageView');
             }
-            fbq('track', 'PageView', {}, {eventID: eventId});
+            fbq('track', 'PageView', data, {eventID: eventId});
         }
         if(this.#props.ShowConsole){
             console.log('PageView', data, returnVal);
@@ -103,7 +103,7 @@ class mkFBIntegrator {
             if(this.#props.ShowConsole){
                 console.log('FBP ViewContent');
             }
-            fbq('track', 'ViewContent', {}, {eventID: eventId} );
+            fbq('track', 'ViewContent', data, {eventID: eventId} );
         }
         if(this.#props.ShowConsole){
             console.log('ViewContent', data, returnVal);
@@ -118,7 +118,7 @@ class mkFBIntegrator {
             if(this.#props.ShowConsole){
                 console.log('FBP CompleteRegistration');
             }
-            fbq('track', 'CompleteRegistration', {}, {eventID: eventId} );
+            fbq('track', 'CompleteRegistration', data, {eventID: eventId} );
         }
         if(this.#props.ShowConsole){
             console.log('CompleteRegistration', data, returnVal);
@@ -133,7 +133,7 @@ class mkFBIntegrator {
             if(this.#props.ShowConsole){
                 console.log('FBP AddPaymentInfo');
             }
-            fbq('track', 'AddPaymentInfo', {}, {eventID: eventId} );
+            fbq('track', 'AddPaymentInfo', data, {eventID: eventId} );
         }
         if(this.#props.ShowConsole){
             console.log('AddPaymentInfo', data, returnVal);
@@ -148,7 +148,7 @@ class mkFBIntegrator {
             if(this.#props.ShowConsole){
                 console.log('FBP Search');
             }
-            fbq('track', 'Search', {}, {eventID: eventId} );
+            fbq('track', 'Search', data, {eventID: eventId} );
         }
         if(this.#props.ShowConsole){
             console.log('Search', data, returnVal);
@@ -163,7 +163,7 @@ class mkFBIntegrator {
             if(this.#props.ShowConsole){
                 console.log('FBP AddToCart');
             }
-            fbq('track', 'AddToCart', {}, {eventID: eventId} );
+            fbq('track', 'AddToCart', data, {eventID: eventId} );
         }
         if(this.#props.ShowConsole){
             console.log('AddToCart', data, returnVal);
@@ -178,7 +178,7 @@ class mkFBIntegrator {
             if(this.#props.ShowConsole){
                 console.log('FBP InitiateCheckout');
             }
-            fbq('track', 'InitiateCheckout', {}, {eventID: eventId} );
+            fbq('track', 'InitiateCheckout', data, {eventID: eventId} );
         }
         if(this.#props.ShowConsole){
             console.log('InitiateCheckout', data, returnVal);
@@ -203,7 +203,7 @@ class mkFBIntegrator {
             if(this.#props.ShowConsole){
                 console.log('FBP Purchase');
             }
-            fbq('track', 'Purchase', {}, {eventID: eventId} );
+            fbq('track', 'Purchase', data, {eventID: eventId} );
         }
         if(this.#props.ShowConsole){
             console.log('Purchase', data, returnVal);
