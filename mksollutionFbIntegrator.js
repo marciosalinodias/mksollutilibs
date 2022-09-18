@@ -210,4 +210,19 @@ class mkFBIntegrator {
         }
         return returnVal;
     };
+
+    callEvent = async function (event, data = null) {
+        let eventId = this.#props.idPrefix + Date.now();
+        let returnVal = await this.#mkPost(event, eventId, data);
+        if(this.#props.fb.FbPixelToo && fbq){
+            if(this.#props.ShowConsole){
+                console.log('FBP '+ event);
+            }
+            fbq('track', event, data, {eventID: eventId} );
+        }
+        if(this.#props.ShowConsole){
+            console.log(event, data, returnVal);
+        }
+        return returnVal;
+    };
 };
